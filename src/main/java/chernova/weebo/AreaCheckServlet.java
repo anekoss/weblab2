@@ -20,9 +20,15 @@ public class AreaCheckServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         TableBean table = (TableBean) req.getSession().getAttribute("table");
         ResponseBean response = new ResponseBean();
-        double x = Double.parseDouble(req.getParameter("x"));
-        double y = Double.parseDouble(req.getParameter("y"));
-        double r = Double.parseDouble(req.getParameter("r"));
+        String xString = req.getParameter("x");
+        if(xString.length()>=10) {xString = xString.substring(0,11);}
+        double x = Double.parseDouble(xString);
+        String yString = req.getParameter("y");
+        if(yString.length()>=10) {yString = yString.substring(0,11);}
+        double y = Double.parseDouble(yString);
+        String rString = req.getParameter("r");
+        if(rString.length()>=10) {rString = rString.substring(0,11);}
+        double r = Double.parseDouble(rString);
         long start = System.nanoTime();
         String curTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
         long exTime = (System.nanoTime() - start) / 1000;
